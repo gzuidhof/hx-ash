@@ -46,7 +46,7 @@ class Entity
     public var next:Entity;
     public var components(default, null):ClassMap<Class<Dynamic>, Dynamic>;
 
-    public function new(name:String = "")
+    public function new(?name:String = "")
     {
         componentAdded = new Signal2<Entity, Class<Dynamic>>();
         componentRemoved = new Signal2<Entity, Class<Dynamic>>();
