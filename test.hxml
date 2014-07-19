@@ -42,15 +42,4 @@
 #-D HXCPP_M64
 -cpp out/test/cpp_test
 
---next
-
-## CPP
--main TestMain
--lib munit
--lib hamcrest
--cp src
-
--cp test
--java out/test/java_test.jar
-
 
