@@ -12,7 +12,7 @@ Check out original Ash website for great articles on entity frameworks and game 
  * Review generacted code on performance, add inlines (especially important to inline iterators)
 
 **CHANGES:**
-Dead Code Elimination fix by nadako.
+Dead Code Elimination fix by eliasku.
 https://github.com/nadako/Ash-HaXe/pull/16
 
 Author: Dan Korostelev <nadako@gmail.com>
