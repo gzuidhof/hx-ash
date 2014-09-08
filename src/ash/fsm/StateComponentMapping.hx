@@ -67,7 +67,7 @@ class StateComponentMapping<T>
      * @return This ComponentMapping, so more modifications can be applied
      */
 
-    public function withSingleton(type:Class<Dynamic> = null):StateComponentMapping<T>
+    public function withSingleton(type:Class<T> = null):StateComponentMapping<T>
     {
         if (type == null)
             type = componentType;
