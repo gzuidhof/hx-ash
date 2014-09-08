@@ -5,10 +5,10 @@ import org.hamcrest.MatchersBase;
 import ash.fsm.ComponentInstanceProvider;
 import ash.Mocks;
 
-class ComponentInstanceProviderTest extends MatchersBase
+class ComponentInstanceProviderTest extends MatchersBaseTestCase
 {
     @Test
-    public function providerReturnsTheInstance():Void
+    public function testproviderReturnsTheInstance():Void
     {
         var instance:MockComponent = new MockComponent();
         var provider:ComponentInstanceProvider<MockComponent> = new ComponentInstanceProvider( instance );
@@ -16,7 +16,7 @@ class ComponentInstanceProviderTest extends MatchersBase
     }
 
     @Test
-    public function providersWithSameInstanceHaveSameIdentifier():Void
+    public function testprovidersWithSameInstanceHaveSameIdentifier():Void
     {
         var instance:MockComponent = new MockComponent();
         var provider1:ComponentInstanceProvider<MockComponent> = new ComponentInstanceProvider( instance );
@@ -25,7 +25,7 @@ class ComponentInstanceProviderTest extends MatchersBase
     }
 
     @Test
-    public function providersWithDifferentInstanceHaveDifferentIdentifier():Void
+    public function testprovidersWithDifferentInstanceHaveDifferentIdentifier():Void
     {
         var provider1:ComponentInstanceProvider<MockComponent> = new ComponentInstanceProvider( new MockComponent() );
         var provider2:ComponentInstanceProvider<MockComponent> = new ComponentInstanceProvider( new MockComponent() );

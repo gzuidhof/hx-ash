@@ -2,22 +2,20 @@ package ash.signals;
 
 import org.hamcrest.MatchersBase;
 
-import massive.munit.Assert;
-
 import ash.signals.Signal0;
 
-class SignalTest extends MatchersBase
+class SignalTest extends MatchersBaseTestCase
 {
     private var signal:Signal0;
 
     @Before
-    public function createSignal():Void
+    override public function setup():Void
     {
         signal = new Signal0();
     }
 
     @After
-    public function destroySignal():Void
+    override public function tearDown():Void
     {
         signal = null;
     }
@@ -47,54 +45,60 @@ class SignalTest extends MatchersBase
         };
     }
 
-    private static function failIfCalled():Void
+    private function failIfCalled():Void
     {
-        Assert.fail('This function should not have been called.');
+		
+        throw ('This function should not have been called.');
+		assertTrue(false);
     }
 
     private function methodFailIfCalled():Void
     {
-        Assert.fail('This function should not have been called.');
+		throw ('This function should not have been called.');
+		assertTrue(false);
     }
 
     @Test
-    public function newSignalHasNullHead():Void
+    public function testnewSignalHasNullHead():Void
     {
         assertThat(signal.head, nullValue());
     }
 
     @Test
-    public function newSignalHasListenersCountZero():Void
+    public function testnewSignalHasListenersCountZero():Void
     {
         assertThat(signal.numListeners, equalTo(0));
     }
 
     @Test
-    public function addListenerThenDispatchShouldCallIt():Void
+    public function testaddListenerThenDispatchShouldCallIt():Void
     {
         var h = shouldCall();
         signal.add(h.func);
         dispatchSignal();
-        h.assertIsCalled();
+        assertTrue(h.assertIsCalled());
     }
 
     @Test
-    public function addListenerThenListenersCountIsOne():Void
+    public function testaddListenerThenListenersCountIsOne():Void
     {
         signal.add(newEmptyHandler());
         assertThat(signal.numListeners, equalTo(1));
     }
 
     @Test
-    public function addListenerThenRemoveThenDispatchShouldNotCallListener():Void
+    public function testaddListenerThenRemoveThenDispatchShouldNotCallListener():Void
     {
         signal.add(failIfCalled);
         signal.remove(failIfCalled);
         dispatchSignal();
+		
+		//Necessary because assertion is necessary. Actual assert is in in failIfcalled.
+		assertTrue(true);
     }
 
     @Test
-    public function addListenerThenRemoveThenListenersCountIsZero():Void
+    public function testaddListenerThenRemoveThenListenersCountIsZero():Void
     {
         signal.add(failIfCalled);
         signal.remove(failIfCalled);
@@ -102,15 +106,18 @@ class SignalTest extends MatchersBase
     }
 
     @Test
-    public function addMethodListenerThenRemoveThenDispatchShouldNotCallListener():Void
+    public function testaddMethodListenerThenRemoveThenDispatchShouldNotCallListener():Void
     {
         signal.add(methodFailIfCalled);
         signal.remove(methodFailIfCalled);
         dispatchSignal();
+		
+		//Necessary because assertion is necessary. Actual assert is in in failIfcalled.
+		assertTrue(true);
     }
 
     @Test
-    public function addMethodListenerThenRemoveThenListenersCountIsZero():Void
+    public function testaddMethodListenerThenRemoveThenListenersCountIsZero():Void
     {
         signal.add(methodFailIfCalled);
         signal.remove(methodFailIfCalled);
@@ -118,36 +125,39 @@ class SignalTest extends MatchersBase
     }
 
     @Test
-    public function removeFunctionNotInListenersShouldNotThrowError():Void
+    public function testremoveFunctionNotInListenersShouldNotThrowError():Void
     {
         signal.remove(newEmptyHandler());
         dispatchSignal();
+		
+		//Necessary because assertion is necessary. Actual assert is in in failIfcalled.
+		assertTrue(true);
     }
 
     @Test
-    public function addListenerThenRemoveFunctionNotInListenersShouldStillCallListener():Void
+    public function testaddListenerThenRemoveFunctionNotInListenersShouldStillCallListener():Void
     {
         var h = shouldCall();
         signal.add(h.func);
         signal.remove(function() {});
         dispatchSignal();
-        h.assertIsCalled();
+        assertTrue(h.assertIsCalled());
     }
 
     @Test
-    public function add2ListenersThenDispatchShouldCallBoth():Void
+    public function testadd2ListenersThenDispatchShouldCallBoth():Void
     {
         var h1 = shouldCall();
         var h2 = shouldCall();
         signal.add(h1.func);
         signal.add(h2.func);
         dispatchSignal();
-        h1.assertIsCalled();
-        h2.assertIsCalled();
+        assertTrue(h1.assertIsCalled());
+        assertTrue(h2.assertIsCalled());
     }
 
     @Test
-    public function add2ListenersThenListenersCountIsTwo():Void
+    public function testadd2ListenersThenListenersCountIsTwo():Void
     {
         signal.add(newEmptyHandler());
         signal.add(newEmptyHandler());
@@ -155,29 +165,29 @@ class SignalTest extends MatchersBase
     }
 
     @Test
-    public function add2ListenersRemove1stThenDispatchShouldCall2ndNot1stListener():Void
+    public function testadd2ListenersRemove1stThenDispatchShouldCall2ndNot1stListener():Void
     {
         var h = shouldCall();
         signal.add(failIfCalled);
         signal.add(h.func);
         signal.remove(failIfCalled);
         dispatchSignal();
-        h.assertIsCalled();
+        assertTrue(h.assertIsCalled());
     }
 
     @Test
-    public function add2ListenersRemove2ndThenDispatchShouldCall1stNot2ndListener():Void
+    public function testadd2ListenersRemove2ndThenDispatchShouldCall1stNot2ndListener():Void
     {
         var h = shouldCall();
         signal.add(h.func);
         signal.add(failIfCalled);
         signal.remove(failIfCalled);
         dispatchSignal();
-        h.assertIsCalled();
+        assertTrue(h.assertIsCalled());
     }
 
     @Test
-    public function add2ListenersThenRemove1ThenListenersCountIsOne():Void
+    public function testadd2ListenersThenRemove1ThenListenersCountIsOne():Void
     {
         signal.add(newEmptyHandler());
         signal.add(failIfCalled);
@@ -186,7 +196,7 @@ class SignalTest extends MatchersBase
     }
 
     @Test
-    public function addSameListenerTwiceShouldOnlyAddItOnce():Void
+    public function testaddSameListenerTwiceShouldOnlyAddItOnce():Void
     {
         var count:Int = 0;
         var func = function():Void
@@ -200,15 +210,17 @@ class SignalTest extends MatchersBase
     }
 
     @Test
-    public function addTheSameListenerTwiceShouldNotThrowError():Void
+    public function testaddTheSameListenerTwiceShouldNotThrowError():Void
     {
         var listener = newEmptyHandler();
         signal.add(listener);
         signal.add(listener);
+		//Necessary because assertion is necessary. Actual assert is not throwing an error.
+		assertTrue(true);
     }
 
     @Test
-    public function addSameListenerTwiceThenListenersCountIsOne():Void
+    public function testaddSameListenerTwiceThenListenersCountIsOne():Void
     {
         signal.add(failIfCalled);
         signal.add(failIfCalled);
@@ -216,13 +228,13 @@ class SignalTest extends MatchersBase
     }
 
     @Test
-    public function dispatch2Listeners1stListenerRemovesItselfThen2ndListenerIsStillCalled():Void
+    public function testdispatch2Listeners1stListenerRemovesItselfThen2ndListenerIsStillCalled():Void
     {
         var h = shouldCall();
         signal.add(selfRemover);
         signal.add(h.func);
         dispatchSignal();
-        h.assertIsCalled();
+        assertTrue(h.assertIsCalled());
     }
 
     private function selfRemover():Void
@@ -231,22 +243,22 @@ class SignalTest extends MatchersBase
     }
 
     @Test
-    public function dispatch2Listeners2ndListenerRemovesItselfThen1stListenerIsStillCalled():Void
+    public function testdispatch2Listeners2ndListenerRemovesItselfThen1stListenerIsStillCalled():Void
     {
         var h = shouldCall();
         signal.add(h.func);
         signal.add(selfRemover);
         dispatchSignal();
-        h.assertIsCalled();
+        assertTrue(h.assertIsCalled());
     }
 
     @Test
-    public function addingAListenerDuringDispatchShouldNotCallIt():Void
+    public function testaddingAListenerDuringDispatchShouldNotCallIt():Void
     {
         var h = shouldCall(addListenerDuringDispatch);
         signal.add(h.func);
         dispatchSignal();
-        h.assertIsCalled();
+        assertTrue(h.assertIsCalled());
     }
 
     private function addListenerDuringDispatch():Void
@@ -255,7 +267,7 @@ class SignalTest extends MatchersBase
     }
 
     @Test
-    public function addingAListenerDuringDispatchIncrementsListenersCount():Void
+    public function testaddingAListenerDuringDispatchIncrementsListenersCount():Void
     {
         signal.add(addListenerDuringDispatchToTestCount);
         dispatchSignal();
@@ -270,11 +282,14 @@ class SignalTest extends MatchersBase
     }
 
     @Test
-    public function dispatch2Listeners2ndListenerRemoves1stThen1stListenerIsNotCalled():Void
+    public function testdispatch2Listeners2ndListenerRemoves1stThen1stListenerIsNotCalled():Void
     {
         signal.add(removeFailListener);
         signal.add(failIfCalled);
         dispatchSignal();
+		
+		//Necessary because assertion is necessary. Actual assert is in in failIfcalled.
+		assertTrue(true);
     }
 
     private function removeFailListener():Void
@@ -283,7 +298,7 @@ class SignalTest extends MatchersBase
     }
 
     @Test
-    public function add2ListenersThenRemoveAllShouldLeaveNoListeners():Void
+    public function testadd2ListenersThenRemoveAllShouldLeaveNoListeners():Void
     {
         signal.add(newEmptyHandler());
         signal.add(newEmptyHandler());
@@ -292,7 +307,7 @@ class SignalTest extends MatchersBase
     }
 
     @Test
-    public function addListenerThenRemoveAllThenAddAgainShouldAddListener():Void
+    public function testaddListenerThenRemoveAllThenAddAgainShouldAddListener():Void
     {
         var handler = newEmptyHandler();
         signal.add(handler);
@@ -302,7 +317,7 @@ class SignalTest extends MatchersBase
     }
 
     @Test
-    public function add2ListenersThenRemoveAllThenListenerCountIsZero():Void
+    public function testadd2ListenersThenRemoveAllThenListenerCountIsZero():Void
     {
         signal.add(newEmptyHandler());
         signal.add(newEmptyHandler());
@@ -311,12 +326,15 @@ class SignalTest extends MatchersBase
     }
 
     @Test
-    public function removeAllDuringDispatchShouldStopAll():Void
+    public function testremoveAllDuringDispatchShouldStopAll():Void
     {
         signal.add(removeAllListeners);
         signal.add(failIfCalled);
         signal.add(newEmptyHandler());
         dispatchSignal();
+		
+		//Necessary because assertion is necessary. Actual assert is in in failIfcalled.
+		assertTrue(true);
     }
 
     private function removeAllListeners():Void
@@ -325,16 +343,16 @@ class SignalTest extends MatchersBase
     }
 
     @Test
-    public function addOnceListenerThenDispatchShouldCallIt():Void
+    public function testaddOnceListenerThenDispatchShouldCallIt():Void
     {
         var h = shouldCall();
         signal.addOnce(h.func);
         dispatchSignal();
-        h.assertIsCalled();
+        assertTrue(h.assertIsCalled());
     }
 
     @Test
-    public function addOnceListenerShouldBeRemovedAfterDispatch():Void
+    public function testaddOnceListenerShouldBeRemovedAfterDispatch():Void
     {
         signal.addOnce(newEmptyHandler());
         dispatchSignal();

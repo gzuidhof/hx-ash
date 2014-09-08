@@ -1,0 +1,45 @@
+## Neko
+-main TestMain
+-lib munit
+-lib hamcrest
+-cp ../src
+-cp ../test
+
+-neko build/test.n
+-cmd (echo __ Testing neko target. __ && neko build/test.n)
+
+--next
+
+## Flash 9+, currently not actually testing :c
+-main TestMain
+-lib munit
+-lib hamcrest
+-cp ../src
+-cp ../test
+-swf-version 9
+-swf build/as3_test.swf
+-cmd echo __ Flash target succesfully compiled. __
+
+--next
+
+-main TestMain
+-lib munit
+-lib hamcrest
+-cp ../src
+-cp ../test
+
+-js build/test.js
+-cmd (echo __ Testing html5 target. __ && phantomjs build/test.js)
+
+--next
+
+## CPP
+-main TestMain
+-lib munit
+-lib hamcrest
+-cp ../src
+-cp ../test
+
+#-D HXCPP_M64
+-cpp build/cpp_test
+-cmd (echo __ Testing C++ target. __ && cd build && cd cpp_test && TestMain && cd .. && cd ..)

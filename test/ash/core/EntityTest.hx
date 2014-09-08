@@ -5,18 +5,18 @@ import org.hamcrest.MatchersBase;
 import ash.core.Entity;
 import ash.Mocks;
 
-class EntityTest extends MatchersBase
+class EntityTest extends MatchersBaseTestCase
 {
     private var entity:Entity;
 
     @Before
-    public function createEntity():Void
+    override public function setup():Void
     {
         entity = new Entity();
     }
 
     @After
-    public function clearEntity():Void
+    override public function tearDown():Void
     {
         entity = null;
     }
@@ -27,7 +27,7 @@ class EntityTest extends MatchersBase
     }
 
     @Test
-    public function addReturnsReferenceToEntity():Void
+    public function testAddReturnsReferenceToEntity():Void
     {
         var component:MockComponent = new MockComponent();
         var e:Entity = entity.add(component);
@@ -35,7 +35,7 @@ class EntityTest extends MatchersBase
     }
 
     @Test
-    public function canStoreAndRetrieveComponent():Void
+    public function testCanStoreAndRetrieveComponent():Void
     {
         var component:MockComponent = new MockComponent();
         entity.add(component);
@@ -43,7 +43,7 @@ class EntityTest extends MatchersBase
     }
 
     @Test
-    public function canStoreAndRetrieveMultipleComponents():Void
+    public function testCanStoreAndRetrieveMultipleComponents():Void
     {
         var component1:MockComponent = new MockComponent();
         entity.add(component1);
@@ -54,7 +54,7 @@ class EntityTest extends MatchersBase
     }
 
     @Test
-    public function canReplaceComponent():Void
+    public function testCanReplaceComponent():Void
     {
         var component1:MockComponent = new MockComponent();
         entity.add(component1);
@@ -64,7 +64,7 @@ class EntityTest extends MatchersBase
     }
 
     @Test
-    public function canStoreBaseAndExtendedComponents():Void
+    public function testCanStoreBaseAndExtendedComponents():Void
     {
         var component1:MockComponent = new MockComponent();
         entity.add(component1);
@@ -75,7 +75,7 @@ class EntityTest extends MatchersBase
     }
 
     @Test
-    public function canStoreExtendedComponentAsBaseType():Void
+    public function testcanStoreExtendedComponentAsBaseType():Void
     {
         var component:MockComponentExtended = new MockComponentExtended();
         entity.add(component, MockComponent);
@@ -83,13 +83,13 @@ class EntityTest extends MatchersBase
     }
 
     @Test
-    public function getReturnNullIfNoComponent():Void
+    public function testgetReturnNullIfNoComponent():Void
     {
         assertThat(entity.get(MockComponent), nullValue());
     }
 
     @Test
-    public function willRetrieveAllComponents():Void
+    public function testwillRetrieveAllComponents():Void
     {
         var component1:MockComponent = new MockComponent();
         entity.add(component1);
@@ -103,67 +103,67 @@ class EntityTest extends MatchersBase
     }
 
     @Test
-    public function hasComponentIsFalseIfComponentTypeNotPresent():Void
+    public function testhasComponentIsFalseIfComponentTypeNotPresent():Void
     {
         entity.add(new MockComponent2());
         assertThat(entity.has(MockComponent), is(false));
     }
 
     @Test
-    public function hasComponentIsTrueIfComponentTypeIsPresent():Void
+    public function testhasComponentIsTrueIfComponentTypeIsPresent():Void
     {
         entity.add(new MockComponent());
         assertThat(entity.has(MockComponent), is(true));
     }
 
     @Test
-    public function canRemoveComponent():Void
+    public function testcanRemoveComponent():Void
     {
         var component:MockComponent = new MockComponent();
         entity.add(component);
         entity.remove(MockComponent);
         assertThat(entity.has(MockComponent), is(false));
     }
-
+	
     @Test
-    public function storingComponentTriggersAddedSignal():Void
+    public function teststoringComponentTriggersAddedSignal():Void
     {
         var h = shouldCall(function(e, c) {});
         var component:MockComponent = new MockComponent();
         entity.componentAdded.add(h.func);
         entity.add(component);
-        h.assertIsCalled();
+        assertTrue(h.assertIsCalled());
     }
 
     @Test
-    public function removingComponentTriggersRemovedSignal():Void
+    public function testremovingComponentTriggersRemovedSignal():Void
     {
         var h = shouldCall(function(e, c) {});
         var component:MockComponent = new MockComponent();
         entity.add(component);
         entity.componentRemoved.add(h.func);
         entity.remove(MockComponent);
-        h.assertIsCalled();
+        assertTrue(h.assertIsCalled());
     }
-
+	
     @Test
-    public function componentAddedSignalContainsCorrectParameters():Void
+    public function testcomponentAddedSignalContainsCorrectParameters():Void
     {
         var component:MockComponent = new MockComponent();
-        entity.componentAdded.add(testSignalContent);
+        entity.componentAdded.add(atestSignalContent);
         entity.add(component);
     }
 
     @Test
-    public function componentRemovedSignalContainsCorrectParameters():Void
+    public function testcomponentRemovedSignalContainsCorrectParameters():Void
     {
         var component:MockComponent = new MockComponent();
         entity.add(component);
-        entity.componentRemoved.add(testSignalContent);
+        entity.componentRemoved.add(atestSignalContent);
         entity.remove(MockComponent);
     }
 
-    private function testSignalContent(signalEntity:Entity, componentClass:Class<Dynamic>):Void
+    private function atestSignalContent(signalEntity:Entity, componentClass:Class<Dynamic>):Void
     {
         assertThat(signalEntity, sameInstance(entity));
         assertThat(componentClass, sameInstance(MockComponent));
@@ -195,14 +195,14 @@ class EntityTest extends MatchersBase
     @Test
     public function testChangingEntityNameDispatchesSignal():Void
     {
-        var h = shouldCall(testNameChangedSignal);
+        var h = shouldCall(atestNameChangedSignal);
         entity = new Entity( "anything" );
         entity.nameChanged.add(h.func);
         entity.name = "otherThing";
         h.assertIsCalled();
     }
 
-    private function testNameChangedSignal(signalEntity:Entity, oldName:String):Void
+    private function atestNameChangedSignal(signalEntity:Entity, oldName:String):Void
     {
         assertThat(signalEntity, sameInstance(entity));
         assertThat(entity.name, equalTo("otherThing"));

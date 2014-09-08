@@ -8,13 +8,13 @@ import ash.core.Engine;
 import ash.tools.ListIteratingSystem;
 import ash.Mocks;
 
-class ListIteratingSystemTest extends MatchersBase
+class ListIteratingSystemTest extends MatchersBaseTestCase
 {
     private var entities:Array<Entity>;
     private var callCount:Int;
 
     @Test
-    public function updateIteratesOverNodes():Void
+    public function testupdateIteratesOverNodes():Void
     {
         var engine:Engine = new Engine();
         var entity1:Entity = new Entity();

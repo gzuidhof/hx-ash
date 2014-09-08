@@ -8,20 +8,20 @@ import ash.core.Engine;
 import ash.core.Node;
 import ash.Mocks;
 
-class ComponentMatchingFamilyTest extends MatchersBase
+class ComponentMatchingFamilyTest extends MatchersBaseTestCase
 {
     private var engine:Engine;
     private var family:ComponentMatchingFamily<MockNode>;
 
     @Before
-    public function createFamily():Void
+    override public function setup():Void
     {
         engine = new Engine();
         family = new ComponentMatchingFamily( MockNode, engine );
     }
 
     @After
-    public function clearFamily():Void
+    override public function tearDown():Void
     {
         family = null;
         engine = null;
@@ -129,7 +129,7 @@ class ComponentMatchingFamilyTest extends MatchersBase
     }
 
     @Test
-    public function nodeListContainsOnlyMatchingEntities():Void
+    public function testNodeListContainsOnlyMatchingEntities():Void
     {
         var entities:Array<Entity> = [];
         for (i in 0...5)
@@ -149,7 +149,7 @@ class ComponentMatchingFamilyTest extends MatchersBase
     }
 
     @Test
-    public function nodeListContainsAllMatchingEntities():Void
+    public function testNodeListContainsAllMatchingEntities():Void
     {
         var entities:Array<Entity> = [];
         for (i in 0...5)
@@ -171,7 +171,7 @@ class ComponentMatchingFamilyTest extends MatchersBase
     }
 
     @Test
-    public function cleanUpEmptiesNodeList():Void
+    public function testCleanUpEmptiesNodeList():Void
     {
         var entity:Entity = new Entity();
         entity.add(new Point());
@@ -182,7 +182,7 @@ class ComponentMatchingFamilyTest extends MatchersBase
     }
 
     @Test
-    public function cleanUpSetsNextNodeToNull():Void
+    public function testCleanUpSetsNextNodeToNull():Void
     {
         var entities:Array<Entity> = [];
         for (i in 0...5)

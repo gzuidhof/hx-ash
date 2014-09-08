@@ -6,24 +6,24 @@ import ash.Mocks.EmptySystem2;
 
 import org.hamcrest.MatchersBase;
 
-class SystemSingletonProviderTest extends MatchersBase
+class SystemSingletonProviderTest extends MatchersBaseTestCase
 {
     @Test
-    public function providerReturnsAnInstanceOfSystem():Void
+    public function testproviderReturnsAnInstanceOfSystem():Void
     {
         var provider:SystemSingletonProvider<EmptySystem> = new SystemSingletonProvider( EmptySystem );
         assertThat(provider.getSystem(), instanceOf(EmptySystem));
     }
 
     @Test
-    public function providerReturnsSameInstanceEachTime():Void
+    public function testproviderReturnsSameInstanceEachTime():Void
     {
         var provider:SystemSingletonProvider<EmptySystem> = new SystemSingletonProvider( EmptySystem );
         assertThat(provider.getSystem(), equalTo(provider.getSystem()));
     }
 
     @Test
-    public function providersWithSameSystemHaveDifferentIdentifier():Void
+    public function testprovidersWithSameSystemHaveDifferentIdentifier():Void
     {
         var provider1:SystemSingletonProvider<EmptySystem> = new SystemSingletonProvider( EmptySystem );
         var provider2:SystemSingletonProvider<EmptySystem> = new SystemSingletonProvider( EmptySystem );
@@ -31,7 +31,7 @@ class SystemSingletonProviderTest extends MatchersBase
     }
 
     @Test
-    public function providersWithDifferentSystemsHaveDifferentIdentifier():Void
+    public function testprovidersWithDifferentSystemsHaveDifferentIdentifier():Void
     {
         var provider1:SystemSingletonProvider<EmptySystem> = new SystemSingletonProvider( EmptySystem );
         var provider2:SystemSingletonProvider<EmptySystem2> = new SystemSingletonProvider( EmptySystem2 );

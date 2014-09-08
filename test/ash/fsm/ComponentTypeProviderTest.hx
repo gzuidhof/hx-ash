@@ -5,24 +5,24 @@ import org.hamcrest.MatchersBase;
 import ash.fsm.ComponentTypeProvider;
 import ash.Mocks;
 
-class ComponentTypeProviderTest extends MatchersBase
+class ComponentTypeProviderTest extends MatchersBaseTestCase
 {
     @Test
-    public function providerReturnsAnInstanceOfType():Void
+    public function testproviderReturnsAnInstanceOfType():Void
     {
         var provider:ComponentTypeProvider<MockComponent> = new ComponentTypeProvider( MockComponent );
         assertThat(provider.getComponent(), any(MockComponent));
     }
 
     @Test
-    public function providerReturnsNewInstanceEachTime():Void
+    public function testproviderReturnsNewInstanceEachTime():Void
     {
         var provider:ComponentTypeProvider<MockComponent> = new ComponentTypeProvider( MockComponent );
         assertThat(provider.getComponent(), not(provider.getComponent()));
     }
 
     @Test
-    public function providersWithSameTypeHaveSameIdentifier():Void
+    public function testprovidersWithSameTypeHaveSameIdentifier():Void
     {
         var provider1:ComponentTypeProvider<MockComponent> = new ComponentTypeProvider( MockComponent );
         var provider2:ComponentTypeProvider<MockComponent> = new ComponentTypeProvider( MockComponent );
@@ -30,7 +30,7 @@ class ComponentTypeProviderTest extends MatchersBase
     }
 
     @Test
-    public function providersWithDifferentTypeHaveDifferentIdentifier():Void
+    public function testprovidersWithDifferentTypeHaveDifferentIdentifier():Void
     {
         var provider1:ComponentTypeProvider<MockComponent> = new ComponentTypeProvider( MockComponent );
         var provider2:ComponentTypeProvider<MockComponent2> = new ComponentTypeProvider( MockComponent2 );

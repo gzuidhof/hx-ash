@@ -6,7 +6,7 @@ import ash.core.Engine;
 import ash.core.System;
 import ash.Mocks;
 
-class SystemTest extends MatchersBase
+class SystemTest extends MatchersBaseTestCase
 {
     public var callBack:Dynamic;
 
@@ -16,20 +16,20 @@ class SystemTest extends MatchersBase
     private var system2:MockSystem;
 
     @Before
-    public function createEntity():Void
+    override public function setup():Void
     {
         engine = new Engine();
     }
 
     @After
-    public function clearEntity():Void
+    override public function tearDown():Void
     {
         engine = null;
         callBack = null;
     }
 
     @Test
-    public function systemsGetterReturnsAllTheSystems():Void
+    public function testsystemsGetterReturnsAllTheSystems():Void
     {
         var system1:System = Type.createInstance(System, []);
         engine.addSystem(system1, 1);
@@ -44,46 +44,46 @@ class SystemTest extends MatchersBase
     }
 
     @Test
-    public function addSystemCallsAddToEngine():Void
+    public function testaddSystemCallsAddToEngine():Void
     {
         var h = shouldCall(addedCallbackMethod);
         var system:System = new MockSystem( this );
         callBack = h.func;
         engine.addSystem(system, 0);
-        h.assertIsCalled();
+        assertTrue(h.assertIsCalled());
     }
 
     @Test
-    public function removeSystemCallsRemovedFromEngine():Void
+    public function testremoveSystemCallsRemovedFromEngine():Void
     {
         var h = shouldCall(removedCallbackMethod);
         var system:System = new MockSystem( this );
         engine.addSystem(system, 0);
         callBack = h.func;
         engine.removeSystem(system);
-        h.assertIsCalled();
+        assertTrue(h.assertIsCalled());
     }
 
     @Test
-    public function engineCallsUpdateOnSystems():Void
+    public function testengineCallsUpdateOnSystems():Void
     {
         var h = shouldCall(updateCallbackMethod);
         var system:System = new MockSystem( this );
         engine.addSystem(system, 0);
         callBack = h.func;
         engine.update(0.1);
-        h.assertIsCalled();
+        assertTrue(h.assertIsCalled());
     }
 
     @Test
-    public function defaultPriorityIsZero():Void
+    public function testdefaultPriorityIsZero():Void
     {
         var system:System = new MockSystem( this );
         assertThat(system.priority, equalTo(0));
     }
 
     @Test
-    public function canSetPriorityWhenAddingSystem():Void
+    public function testcanSetPriorityWhenAddingSystem():Void
     {
         var system:System = new MockSystem( this );
         engine.addSystem(system, 10);
@@ -91,7 +91,7 @@ class SystemTest extends MatchersBase
     }
 
     @Test
-    public function systemsUpdatedInPriorityOrderIfSameAsAddOrder():Void
+    public function testsystemsUpdatedInPriorityOrderIfSameAsAddOrder():Void
     {
         system1 = new MockSystem( this );
         engine.addSystem(system1, 10);
@@ -103,7 +103,7 @@ class SystemTest extends MatchersBase
     }
 
     @Test
-    public function systemsUpdatedInPriorityOrderIfReverseOfAddOrder():Void
+    public function testsystemsUpdatedInPriorityOrderIfReverseOfAddOrder():Void
     {
         system2 = new MockSystem( this );
         engine.addSystem(system2, 20);
@@ -115,7 +115,7 @@ class SystemTest extends MatchersBase
     }
 
     @Test
-    public function systemsUpdatedInPriorityOrderIfPrioritiesAreNegative():Void
+    public function testsystemsUpdatedInPriorityOrderIfPrioritiesAreNegative():Void
     {
         system2 = new MockSystem( this );
         engine.addSystem(system2, 10);
@@ -127,13 +127,13 @@ class SystemTest extends MatchersBase
     }
 
     @Test
-    public function updatingIsFalseBeforeUpdate():Void
+    public function testupdatingIsFalseBeforeUpdate():Void
     {
         assertThat(engine.updating, is(false));
     }
 
     @Test
-    public function updatingIsTrueDuringUpdate():Void
+    public function testupdatingIsTrueDuringUpdate():Void
     {
         var system:System = new MockSystem( this );
         engine.addSystem(system, 0);
@@ -142,25 +142,25 @@ class SystemTest extends MatchersBase
     }
 
     @Test
-    public function updatingIsFalseAfterUpdate():Void
+    public function testupdatingIsFalseAfterUpdate():Void
     {
         engine.update(0.1);
         assertThat(engine.updating, is(false));
     }
 
     @Test
-    public function completeSignalIsDispatchedAfterUpdate():Void
+    public function testcompleteSignalIsDispatchedAfterUpdate():Void
     {
         var h = shouldCall(function() {});
         var system:System = new MockSystem( this );
         engine.addSystem(system, 0);
         callBack = function(s, a, t) { engine.updateComplete.add(h.func); };
         engine.update(0.1);
-        h.assertIsCalled();
+        assertTrue(h.assertIsCalled());
     }
 
     @Test
-    public function getSystemReturnsTheSystem():Void
+    public function testgetSystemReturnsTheSystem():Void
     {
         var system1:System = new MockSystem( this );
         engine.addSystem(system1, 0);
@@ -169,14 +169,14 @@ class SystemTest extends MatchersBase
     }
 
     @Test
-    public function getSystemReturnsNullIfNoSuchSystem():Void
+    public function testgetSystemReturnsNullIfNoSuchSystem():Void
     {
         engine.addSystem(new EmptySystem(), 0);
         assertThat(engine.getSystem(MockSystem), nullValue());
     }
 
     @Test
-    public function removeAllSystemsDoesWhatItSays():Void
+    public function testremoveAllSystemsDoesWhatItSays():Void
     {
         engine.addSystem(new EmptySystem(), 0);
         engine.addSystem(new MockSystem( this ), 0);
@@ -186,7 +186,7 @@ class SystemTest extends MatchersBase
     }
 
     @Test
-    public function removeSystemAndAddItAgainDontCauseInvalidLinkedList():Void
+    public function testremoveSystemAndAddItAgainDontCauseInvalidLinkedList():Void
     {
         var systemB:System = new EmptySystem();
         var systemC:System = new EmptySystem();

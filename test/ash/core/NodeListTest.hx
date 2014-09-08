@@ -7,18 +7,18 @@ import ash.core.Node;
 import ash.matchers.NodeListMatcher;
 import ash.Mocks;
 
-class NodeListTest extends MatchersBase
+class NodeListTest extends MatchersBaseTestCase
 {
     private var nodes:NodeList<MockNode2>;
 
     @Before
-    public function createEntity():Void
+    override public function setup():Void
     {
         nodes = new NodeList<MockNode2>();
     }
 
     @Afters
-    public function clearEntity():Void
+    override public function tearDown():Void
     {
         nodes = null;
     }
@@ -29,28 +29,28 @@ class NodeListTest extends MatchersBase
     }
 
     @Test
-    public function addingNodeTriggersAddedSignal():Void
+    public function testAddingNodeTriggersAddedSignal():Void
     {
         var h = shouldCall();
         var node:MockNode2 = Type.createEmptyInstance(MockNode2);
         nodes.nodeAdded.add(h.func);
         nodes.add(node);
-        h.assertIsCalled();
+        assertTrue(h.assertIsCalled());
     }
 
     @Test
-    public function removingNodeTriggersRemovedSignal():Void
+    public function testremovingNodeTriggersRemovedSignal():Void
     {
         var h = shouldCall();
         var node:MockNode2 = Type.createEmptyInstance(MockNode2);
         nodes.add(node);
         nodes.nodeRemoved.add(h.func);
         nodes.remove(node);
-        h.assertIsCalled();
+        assertTrue(h.assertIsCalled());
     }
 
     @Test
-    public function AllNodesAreCoveredDuringIteration():Void
+    public function testAllNodesAreCoveredDuringIteration():Void
     {
         var nodeArray:Array<MockNode2> = [];
         for (i in 0...5)
@@ -69,7 +69,7 @@ class NodeListTest extends MatchersBase
     }
 
     @Test
-    public function removingCurrentNodeDuringIterationIsValid():Void
+    public function testremovingCurrentNodeDuringIterationIsValid():Void
     {
         var nodeArray:Array<MockNode2> = [];
         for (i in 0...5)
@@ -93,7 +93,7 @@ class NodeListTest extends MatchersBase
     }
 
     @Test
-    public function removingNextNodeDuringIterationIsValid():Void
+    public function testremovingNextNodeDuringIterationIsValid():Void
     {
         var nodeArray:Array<MockNode2> = [];
         for (i in 0...5)
@@ -119,29 +119,29 @@ class NodeListTest extends MatchersBase
     private var tempNode:MockNode2;
 
     @Test
-    public function componentAddedSignalContainsCorrectParameters():Void
+    public function testcomponentAddedSignalContainsCorrectParameters():Void
     {
         tempNode = Type.createEmptyInstance(MockNode2);
-        nodes.nodeAdded.add(testSignalContent);
+        nodes.nodeAdded.add(atestSignalContent);
         nodes.add(tempNode);
     }
 
     @Test
-    public function componentRemovedSignalContainsCorrectParameters():Void
+    public function testcomponentRemovedSignalContainsCorrectParameters():Void
     {
         tempNode = Type.createEmptyInstance(MockNode2);
         nodes.add(tempNode);
-        nodes.nodeRemoved.add(testSignalContent);
+        nodes.nodeRemoved.add(atestSignalContent);
         nodes.remove(tempNode);
     }
 
-    private function testSignalContent(signalNode:MockNode2):Void
+    private function atestSignalContent(signalNode:MockNode2):Void
     {
         assertThat(signalNode, sameInstance(tempNode));
     }
 
     @Test
-    public function nodesInitiallySortedInOrderOfAddition():Void
+    public function testnodesInitiallySortedInOrderOfAddition():Void
     {
         var node1:MockNode2 = Type.createEmptyInstance(MockNode2);
         var node2:MockNode2 = Type.createEmptyInstance(MockNode2);
@@ -153,7 +153,7 @@ class NodeListTest extends MatchersBase
     }
 
     @Test
-    public function swappingOnlyTwoNodesChangesTheirOrder():Void
+    public function testswappingOnlyTwoNodesChangesTheirOrder():Void
     {
         var node1:MockNode2 = Type.createEmptyInstance(MockNode2);
         var node2:MockNode2 = Type.createEmptyInstance(MockNode2);
@@ -164,7 +164,7 @@ class NodeListTest extends MatchersBase
     }
 
     @Test
-    public function swappingAdjacentNodesChangesTheirPositions():Void
+    public function testswappingAdjacentNodesChangesTheirPositions():Void
     {
         var node1:MockNode2 = Type.createEmptyInstance(MockNode2);
         var node2:MockNode2 = Type.createEmptyInstance(MockNode2);
@@ -179,7 +179,7 @@ class NodeListTest extends MatchersBase
     }
 
     @Test
-    public function swappingNonAdjacentNodesChangesTheirPositions():Void
+    public function testswappingNonAdjacentNodesChangesTheirPositions():Void
     {
         var node1:MockNode2 = Type.createEmptyInstance(MockNode2);
         var node2:MockNode2 = Type.createEmptyInstance(MockNode2);
@@ -196,7 +196,7 @@ class NodeListTest extends MatchersBase
     }
 
     @Test
-    public function swappingEndNodesChangesTheirPositions():Void
+    public function testswappingEndNodesChangesTheirPositions():Void
     {
         var node1:MockNode2 = Type.createEmptyInstance(MockNode2);
         var node2:MockNode2 = Type.createEmptyInstance(MockNode2);
@@ -209,7 +209,7 @@ class NodeListTest extends MatchersBase
     }
 
     @Test
-    public function insertionSortCorrectlySortsSortedNodes():Void
+    public function testinsertionSortCorrectlySortsSortedNodes():Void
     {
         var nodes:NodeList<MockNode4> = new NodeList();
         var node1:MockNode4 = new MockNode4( 1 );
@@ -225,7 +225,7 @@ class NodeListTest extends MatchersBase
     }
 
     @Test
-    public function insertionSortCorrectlySortsReversedNodes():Void
+    public function testinsertionSortCorrectlySortsReversedNodes():Void
     {
         var nodes:NodeList<MockNode4> = new NodeList();
         var node1:MockNode4 = new MockNode4( 1 );
@@ -241,7 +241,7 @@ class NodeListTest extends MatchersBase
     }
 
     @Test
-    public function insertionSortCorrectlySortsMixedNodes():Void
+    public function testinsertionSortCorrectlySortsMixedNodes():Void
     {
         var nodes:NodeList<MockNode4> = new NodeList();
         var node1:MockNode4 = new MockNode4( 1 );
@@ -259,7 +259,7 @@ class NodeListTest extends MatchersBase
     }
 
     @Test
-    public function insertionSortRetainsTheOrderOfEquivalentNodes():Void
+    public function testinsertionSortRetainsTheOrderOfEquivalentNodes():Void
     {
         var nodes:NodeList<MockNode4> = new NodeList();
         var node1:MockNode4 = new MockNode4( 1 );
@@ -277,7 +277,7 @@ class NodeListTest extends MatchersBase
     }
 
     @Test
-    public function mergeSortCorrectlySortsSortedNodes():Void
+    public function testmergeSortCorrectlySortsSortedNodes():Void
     {
         var nodes:NodeList<MockNode4> = new NodeList();
         var node1:MockNode4 = new MockNode4( 1 );
@@ -293,7 +293,7 @@ class NodeListTest extends MatchersBase
     }
 
     @Test
-    public function mergeSortCorrectlySortsReversedNodes():Void
+    public function testmergeSortCorrectlySortsReversedNodes():Void
     {
         var nodes:NodeList<MockNode4> = new NodeList();
         var node1:MockNode4 = new MockNode4( 1 );
@@ -309,7 +309,7 @@ class NodeListTest extends MatchersBase
     }
 
     @Test
-    public function mergeSortCorrectlySortsMixedNodes():Void
+    public function testmergeSortCorrectlySortsMixedNodes():Void
     {
         var nodes:NodeList<MockNode4> = new NodeList();
         var node1:MockNode4 = new MockNode4( 1 );

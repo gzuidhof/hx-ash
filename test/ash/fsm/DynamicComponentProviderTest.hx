@@ -5,10 +5,10 @@ import org.hamcrest.MatchersBase;
 import ash.fsm.DynamicComponentProvider.DynamicComponentProviderClosure;
 import ash.Mocks;
 
-class DynamicComponentProviderTest extends MatchersBase
+class DynamicComponentProviderTest extends MatchersBaseTestCase
 {
     @Test
-    public function providerReturnsTheInstance():Void
+    public function testproviderReturnsTheInstance():Void
     {
         var instance:MockComponent = new MockComponent();
         var providerMethod:DynamicComponentProviderClosure<MockComponent> = function():MockComponent
@@ -20,7 +20,7 @@ class DynamicComponentProviderTest extends MatchersBase
     }
 
     @Test
-    public function providersWithSameMethodHaveSameIdentifier():Void
+    public function testprovidersWithSameMethodHaveSameIdentifier():Void
     {
         var instance:MockComponent = new MockComponent();
         var providerMethod:DynamicComponentProviderClosure<MockComponent> = function():MockComponent
@@ -34,7 +34,7 @@ class DynamicComponentProviderTest extends MatchersBase
     }
 
     @Test
-    public function providersWithDifferentMethodsHaveDifferentIdentifier():Void
+    public function testprovidersWithDifferentMethodsHaveDifferentIdentifier():Void
     {
         var instance:MockComponent = new MockComponent();
         var providerMethod1:DynamicComponentProviderClosure<MockComponent> = function():MockComponent

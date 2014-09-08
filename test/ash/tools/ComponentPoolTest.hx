@@ -5,27 +5,22 @@ import org.hamcrest.MatchersBase;
 import ash.tools.ComponentPool;
 import ash.Mocks;
 
-class ComponentPoolTest extends MatchersBase
+class ComponentPoolTest extends MatchersBaseTestCase
 {
-    @Before
-    public function createPool():Void
-    {
-    }
-
     @After
-    public function destroyPool():Void
+    override public function tearDown():Void
     {
         ComponentPool.empty();
     }
 
     @Test
-    public function getRetrievesObjectOfAppropriateClass():Void
+    public function testgetRetrievesObjectOfAppropriateClass():Void
     {
         assertThat(ComponentPool.get(MockComponent), is(MockComponent));
     }
 
     @Test
-    public function disposedComponentsAreRetrievedByGet():Void
+    public function testdisposedComponentsAreRetrievedByGet():Void
     {
         var mockComponent:MockComponent = new MockComponent();
         ComponentPool.dispose(mockComponent);
@@ -34,7 +29,7 @@ class ComponentPoolTest extends MatchersBase
     }
 
     @Test
-    public function emptyPreventsRetrievalOfPreviouslyDisposedComponents():Void
+    public function testemptyPreventsRetrievalOfPreviouslyDisposedComponents():Void
     {
         var mockComponent:MockComponent = new MockComponent();
         ComponentPool.dispose(mockComponent);

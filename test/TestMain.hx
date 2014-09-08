@@ -1,62 +1,50 @@
-import massive.munit.client.PrintClient;
-import massive.munit.client.RichPrintClient;
-import massive.munit.client.HTTPClient;
-import massive.munit.client.JUnitReportClient;
-import massive.munit.client.SummaryReportClient;
-import massive.munit.TestRunner;
-
+import haxe.unit.TestRunner;
 #if js
 import js.Lib;
 #end
 
-/**
- * Auto generated Test Application.
- * Refer to munit command line tool for more information (haxelib run munit)
- */
 class TestMain
 {
 	static function main(){	new TestMain(); }
 
 	public function new()
 	{
-		var suites = new Array<Class<massive.munit.TestSuite>>();
-		suites.push(TestSuite);
-
-		#if MCOVER
-			var client = new mcover.coverage.munit.client.MCoverPrintClient();
-			var httpClient = new HTTPClient(new mcover.coverage.munit.client.MCoverSummaryReportClient());
-		#else
-			var client = new RichPrintClient();
-			var httpClient = new HTTPClient(new SummaryReportClient());
-		#end
-
-		var runner:TestRunner = new TestRunner(client); 
-		runner.addResultClient(httpClient);
-		//runner.addResultClient(new HTTPClient(new JUnitReportClient()));
+		var runner = new TestRunner();
+		runner.add(new ash.core.AshAndFamilyIntegrationTest());
+		runner.add(new ash.core.ComponentMatchingFamilyTest());
+		runner.add(new ash.core.EngineTest());
+		runner.add(new ash.core.EntityTest());
+		runner.add(new ash.core.NodeListTest());
+		runner.add(new ash.core.SystemTest());
+		runner.add(new ash.fsm.ComponentInstanceProviderTest());
+		runner.add(new ash.fsm.ComponentSingletonProviderTest());
+		runner.add(new ash.fsm.ComponentTypeProviderTest());
+		runner.add(new ash.fsm.DynamicComponentProviderTest());
+		runner.add(new ash.fsm.EngineStateMachineTest());
+		runner.add(new ash.fsm.EntityStateMachineTest());
+		runner.add(new ash.fsm.EntityStateTest());
+		runner.add(new ash.fsm.SystemInstanceProviderTest());
+		runner.add(new ash.fsm.SystemMethodProviderTest());
+		runner.add(new ash.fsm.SystemSingletonProviderTest());
+		runner.add(new ash.fsm.SystemStateTest());
+		runner.add(new ash.signals.SignalTest());
+		runner.add(new ash.tools.ComponentPoolTest());
+		runner.add(new ash.tools.ListIteratingSystemTest());
 		
-		runner.completionHandler = completionHandler;
-		runner.run(suites);
+		runner.run();
+		
+		#if js
+		if (runner.result.success)
+			untyped __js__("phantom.exit(0);");
+		else
+			untyped __js__("phantom.exit(1);");
+		#end
+		
+		#if (!flash && !js)
+		Sys.exit(runner.result.success ? 0 : 1);
+		#end
+		
+		
 	}
 
-	/*
-		updates the background color and closes the current browser
-		for flash and html targets (useful for continous integration servers)
-	*/
-	function completionHandler(successful:Bool):Void
-	{
-		try
-		{
-			#if flash
-				flash.external.ExternalInterface.call("testResult", successful);
-			#elseif js
-				js.Lib.eval("testResult(" + successful + ");");
-			#elseif sys
-				Sys.exit(0);
-			#end
-		}
-		// if run from outside browser can get error which we can ignore
-		catch (e:Dynamic)
-		{
-		}
-	}
 }

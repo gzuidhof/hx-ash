@@ -10,24 +10,24 @@ import ash.fsm.DynamicComponentProvider.DynamicComponentProviderClosure;
 import ash.fsm.EntityState;
 import ash.Mocks;
 
-class EntityStateTest extends MatchersBase
+class EntityStateTest extends MatchersBaseTestCase
 {
     private var state:EntityState;
 
     @Before
-    public function createState():Void
+    override public function setup():Void
     {
         state = new EntityState();
     }
 
     @After
-    public function clearState():Void
+    override public function tearDown():Void
     {
         state = null;
     }
 
     @Test
-    public function addWithNoQualifierCreatesTypeProvider():Void
+    public function testaddWithNoQualifierCreatesTypeProvider():Void
     {
         state.add(MockComponent);
         var provider:IComponentProvider<MockComponent> = cast state.providers.get(MockComponent);
@@ -36,7 +36,7 @@ class EntityStateTest extends MatchersBase
     }
 
     @Test
-    public function addWithTypeQualifierCreatesTypeProvider():Void
+    public function testaddWithTypeQualifierCreatesTypeProvider():Void
     {
         state.add(MockComponent).withType(MockComponentExtended);
         var provider:IComponentProvider<MockComponent> = cast state.providers.get(MockComponent);
@@ -45,7 +45,7 @@ class EntityStateTest extends MatchersBase
     }
 
     @Test
-    public function addWithInstanceQualifierCreatesInstanceProvider():Void
+    public function testaddWithInstanceQualifierCreatesInstanceProvider():Void
     {
         var component:MockComponent = new MockComponent();
         state.add(MockComponent).withInstance(component);
@@ -55,7 +55,7 @@ class EntityStateTest extends MatchersBase
     }
 
     @Test
-    public function addWithSingletonQualifierCreatesSingletonProvider():Void
+    public function testaddWithSingletonQualifierCreatesSingletonProvider():Void
     {
         state.add(MockComponent).withSingleton(MockComponent);
         var provider:IComponentProvider<MockComponent> = cast state.providers.get(MockComponent);
@@ -64,7 +64,7 @@ class EntityStateTest extends MatchersBase
     }
 
     @Test
-    public function addWithMethodQualifierCreatesDynamicProvider():Void
+    public function testaddWithMethodQualifierCreatesDynamicProvider():Void
     {
         var dynamicProvider:DynamicComponentProviderClosure<MockComponent> = function():MockComponent
         {

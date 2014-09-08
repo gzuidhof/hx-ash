@@ -6,10 +6,10 @@ import ash.Mocks.EmptySystem;
 
 import org.hamcrest.MatchersBase;
 
-class SystemMethodProviderTest extends MatchersBase
+class SystemMethodProviderTest extends MatchersBaseTestCase
 {
     @Test
-    public function providerReturnsTheInstance():Void
+    public function testproviderReturnsTheInstance():Void
     {
         var instance:EmptySystem = new EmptySystem();
         var providerMethod:DynamicSystemProviderClosure<EmptySystem> = function():EmptySystem
@@ -22,7 +22,7 @@ class SystemMethodProviderTest extends MatchersBase
     }
 
     @Test
-    public function providersWithSameMethodHaveSameIdentifier():Void
+    public function testprovidersWithSameMethodHaveSameIdentifier():Void
     {
         var instance:EmptySystem = new EmptySystem();
         var providerMethod:DynamicSystemProviderClosure<EmptySystem> = function():EmptySystem
@@ -35,7 +35,7 @@ class SystemMethodProviderTest extends MatchersBase
     }
 
     @Test
-    public function providersWithDifferentMethodHaveDifferentIdentifier():Void
+    public function testprovidersWithDifferentMethodHaveDifferentIdentifier():Void
     {
         var instance:EmptySystem = new EmptySystem();
         var providerMethod1:DynamicSystemProviderClosure<EmptySystem> = function():EmptySystem

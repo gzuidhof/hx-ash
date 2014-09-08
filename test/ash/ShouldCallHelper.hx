@@ -2,7 +2,6 @@ package ash;
 
 import haxe.PosInfos;
 
-import massive.munit.Assert;
 
 class ShouldCallHelper<T>
 {
@@ -20,9 +19,18 @@ class ShouldCallHelper<T>
         func = Reflect.makeVarArgs(_func);
     }
 
-    public function assertIsCalled(?info:PosInfos)
+	/**
+	 * Asserts that it was called, returns true if so.
+	 * @param	info
+	 * @return
+	 */
+    public function assertIsCalled(?info:PosInfos): Bool
     {
-        Assert.isTrue(called, info);
+		if (!called)
+		{
+			throw "Awrf! ShouldCallHelper assert failed ";
+		}
+		return called;
     }
 
     private function _func(args:Array<Dynamic>):Dynamic

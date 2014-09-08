@@ -1,34 +1,32 @@
 package ash.core;
 
-import org.hamcrest.MatchersBase;
-
+import MatchersBaseTestCase;
 import ash.core.IFamily;
 import ash.core.Entity;
 import ash.core.Engine;
 import ash.core.Node;
 import ash.core.NodeList;
 import ash.Mocks;
+import haxe.unit.TestCase;
 
-class EngineTest extends MatchersBase
+class EngineTest extends MatchersBaseTestCase
 {
     private var engine:Engine;
 
-    @Before
-    public function createEngine():Void
+    override public function setup():Void
     {
         engine = new Engine();
         engine.familyClass = MockFamily;
         MockFamily.reset();
     }
 
-    @After
-    public function clearEngine():Void
+    override public function tearDown():Void
     {
         engine = null;
     }
 
     @Test
-    public function entitiesGetterReturnsAllTheEntities():Void
+    public function testEntitiesGetterReturnsAllTheEntities():Void
     {
         var entity1:Entity = new Entity();
         engine.addEntity(entity1);
@@ -39,7 +37,7 @@ class EngineTest extends MatchersBase
     }
 
     @Test
-    public function getEntityByNameReturnsCorrectEntity():Void
+    public function testGetEntityByNameReturnsCorrectEntity():Void
     {
         var entity1:Entity = new Entity();
         entity1.name = "otherEntity";
@@ -51,7 +49,7 @@ class EngineTest extends MatchersBase
     }
 
     @Test
-    public function getEntityByNameReturnsNullIfNoEntity():Void
+    public function testGetEntityByNameReturnsNullIfNoEntity():Void
     {
         var entity1:Entity = new Entity();
         entity1.name = "otherEntity";
@@ -63,7 +61,7 @@ class EngineTest extends MatchersBase
     }
 
     @Test
-    public function addEntityChecksWithAllFamilies():Void
+    public function testAddEntityChecksWithAllFamilies():Void
     {
         engine.getNodeList(MockNode);
         engine.getNodeList(MockNode3);
@@ -74,7 +72,7 @@ class EngineTest extends MatchersBase
     }
 
     @Test
-    public function removeEntityChecksWithAllFamilies():Void
+    public function testRemoveEntityChecksWithAllFamilies():Void
     {
         engine.getNodeList(MockNode);
         engine.getNodeList(MockNode3);
@@ -86,7 +84,7 @@ class EngineTest extends MatchersBase
     }
 
     @Test
-    public function removeAllEntitiesChecksWithAllFamilies():Void
+    public function testRemoveAllEntitiesChecksWithAllFamilies():Void
     {
         engine.getNodeList(MockNode);
         engine.getNodeList(MockNode3);
@@ -100,7 +98,7 @@ class EngineTest extends MatchersBase
     }
 
     @Test
-    public function componentAddedChecksWithAllFamilies():Void
+    public function testComponentAddedChecksWithAllFamilies():Void
     {
         engine.getNodeList(MockNode);
         engine.getNodeList(MockNode3);
@@ -112,7 +110,7 @@ class EngineTest extends MatchersBase
     }
 
     @Test
-    public function componentRemovedChecksWithAllFamilies():Void
+    public function testComponentRemovedChecksWithAllFamilies():Void
     {
         engine.getNodeList(MockNode);
         engine.getNodeList(MockNode3);
@@ -125,14 +123,14 @@ class EngineTest extends MatchersBase
     }
 
     @Test
-    public function getNodeListCreatesFamily():Void
+    public function testGetNodeListCreatesFamily():Void
     {
         engine.getNodeList(MockNode);
         assertThat(MockFamily.instances.length, equalTo(1));
     }
 
     @Test
-    public function getNodeListChecksAllEntities():Void
+    public function testGetNodeListChecksAllEntities():Void
     {
         engine.addEntity(new Entity());
         engine.addEntity(new Entity());
@@ -141,7 +139,7 @@ class EngineTest extends MatchersBase
     }
 
     @Test
-    public function releaseNodeListCallsCleanUp():Void
+    public function testGeleaseNodeListCallsCleanUp():Void
     {
         engine.getNodeList(MockNode);
         engine.releaseNodeList(MockNode);
@@ -149,7 +147,7 @@ class EngineTest extends MatchersBase
     }
 
     @Test
-    public function entityCanBeObtainedByName():Void
+    public function testEntityCanBeObtainedByName():Void
     {
         var entity:Entity = new Entity( "anything" );
         engine.addEntity(entity);
@@ -158,14 +156,14 @@ class EngineTest extends MatchersBase
     }
 
     @Test
-    public function getEntityByInvalidNameReturnsNull():Void
+    public function testGetEntityByInvalidNameReturnsNull():Void
     {
         var entity:Entity = engine.getEntityByName("anything");
         assertThat(entity, nullValue());
     }
 
     @Test
-    public function entityCanBeObtainedByNameAfterRenaming():Void
+    public function testEntityCanBeObtainedByNameAfterRenaming():Void
     {
         var entity:Entity = new Entity( "anything" );
         engine.addEntity(entity);
@@ -175,7 +173,7 @@ class EngineTest extends MatchersBase
     }
 
     @Test
-    public function entityCannotBeObtainedByOldNameAfterRenaming():Void
+    public function testEntityCannotBeObtainedByOldNameAfterRenaming():Void
     {
         var entity:Entity = new Entity( "anything" );
         engine.addEntity(entity);

@@ -1,34 +1,33 @@
 package ash.fsm;
 
 import org.hamcrest.MatchersBase;
-import massive.munit.Assert;
 
 import ash.core.Entity;
 import ash.fsm.EntityStateMachine;
 import ash.fsm.EntityState;
 import ash.Mocks;
 
-class EntityStateMachineTest extends MatchersBase
+class EntityStateMachineTest extends MatchersBaseTestCase
 {
     private var fsm:EntityStateMachine;
     private var entity:Entity;
 
     @Before
-    public function createState():Void
+    override public function setup():Void
     {
         entity = new Entity();
         fsm = new EntityStateMachine( entity );
     }
 
     @After
-    public function clearState():Void
+    override public function tearDown():Void
     {
         entity = null;
         fsm = null;
     }
 
     @Test
-    public function enterStateAddsStatesComponents():Void
+    public function testenterStateAddsStatesComponents():Void
     {
         var state:EntityState = new EntityState();
         var component:MockComponent = new MockComponent();
@@ -39,7 +38,7 @@ class EntityStateMachineTest extends MatchersBase
     }
 
     @Test
-    public function enterSecondStateAddsSecondStatesComponents():Void
+    public function testenterSecondStateAddsSecondStatesComponents():Void
     {
         var state1:EntityState = new EntityState();
         var component1:MockComponent = new MockComponent();
@@ -57,7 +56,7 @@ class EntityStateMachineTest extends MatchersBase
     }
 
     @Test
-    public function enterSecondStateRemovesFirstStatesComponents():Void
+    public function testenterSecondStateRemovesFirstStatesComponents():Void
     {
         var state1:EntityState = new EntityState();
         var component1:MockComponent = new MockComponent();
@@ -75,7 +74,7 @@ class EntityStateMachineTest extends MatchersBase
     }
 
     @Test
-    public function enterSecondStateDoesNotRemoveOverlappingComponents():Void
+    public function testenterSecondStateDoesNotRemoveOverlappingComponents():Void
     {
         entity.componentRemoved.add(failIfCalled);
 
@@ -96,7 +95,7 @@ class EntityStateMachineTest extends MatchersBase
     }
 
     @Test
-    public function enterSecondStateRemovesDifferentComponentsOfSameType():Void
+    public function testenterSecondStateRemovesDifferentComponentsOfSameType():Void
     {
         var state1:EntityState = new EntityState();
         var component1:MockComponent = new MockComponent();
@@ -117,6 +116,6 @@ class EntityStateMachineTest extends MatchersBase
 
     private static function failIfCalled(entity:Entity, component:Dynamic):Void
     {
-        Assert.fail("Component was removed when it shouldn't have been.");
+		throw "Component was removed when it shouldn't have been.";
     }
 }

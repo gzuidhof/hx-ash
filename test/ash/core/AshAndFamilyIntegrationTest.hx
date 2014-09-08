@@ -11,18 +11,18 @@ import ash.Mocks;
  * Tests the family class through the engine class. Left over from a previous
  * architecture but retained because all tests should still pass.
  */
-class AshAndFamilyIntegrationTest extends MatchersBase
+class AshAndFamilyIntegrationTest extends MatchersBaseTestCase
 {
     private var engine:Engine;
 
     @Before
-    public function createEntity():Void
+    override public function setup():Void
     {
         engine = new Engine();
     }
 
     @After
-    public function clearEntity():Void
+    override public function tearDown():Void
     {
         engine = null;
     }
@@ -149,7 +149,7 @@ class AshAndFamilyIntegrationTest extends MatchersBase
     }
 
     @Test
-    public function familyContainsOnlyMatchingEntities():Void
+    public function testFamilyContainsOnlyMatchingEntities():Void
     {
         var entities:Array<Entity> = [];
         for (i in 0...5)
@@ -169,7 +169,7 @@ class AshAndFamilyIntegrationTest extends MatchersBase
     }
 
     @Test
-    public function familyContainsAllMatchingEntities():Void
+    public function testFamilyContainsAllMatchingEntities():Void
     {
         var entities:Array<Entity> = [];
         for (i in 0...5)
@@ -191,7 +191,7 @@ class AshAndFamilyIntegrationTest extends MatchersBase
     }
 
     @Test
-    public function releaseFamilyEmptiesNodeList():Void
+    public function testReleaseFamilyEmptiesNodeList():Void
     {
         var entity:Entity = new Entity();
         entity.add(new Point());
@@ -203,7 +203,7 @@ class AshAndFamilyIntegrationTest extends MatchersBase
     }
 
     @Test
-    public function releaseFamilySetsNextNodeToNull():Void
+    public function testReleaseFamilySetsNextNodeToNull():Void
     {
         var entities:Array<Entity> = [];
         for (i in 0...5)
@@ -222,7 +222,7 @@ class AshAndFamilyIntegrationTest extends MatchersBase
     }
 
     @Test
-    public function removeAllEntitiesDoesWhatItSays():Void
+    public function testRemoveAllEntitiesDoesWhatItSays():Void
     {
         var entity:Entity = new Entity();
         entity.add(new Point());

@@ -6,27 +6,27 @@ import ash.Mocks.EmptySystem2;
 
 import org.hamcrest.MatchersBase;
 
-class EngineStateMachineTest extends MatchersBase
+class EngineStateMachineTest extends MatchersBaseTestCase
 {
     private var fsm:EngineStateMachine;
     private var engine:Engine;
 
     @Before
-    public function createState():Void
+    override public function setup():Void
     {
         engine = new Engine();
         fsm = new EngineStateMachine( engine );
     }
 
     @After
-    public function clearState():Void
+    override public function tearDown():Void
     {
         engine = null;
         fsm = null;
     }
 
     @Test
-    public function enterStateAddsStatesSystems():Void
+    public function testenterStateAddsStatesSystems():Void
     {
         var state:EngineState = new EngineState();
         var system:RemovingSystem = new RemovingSystem();
@@ -37,7 +37,7 @@ class EngineStateMachineTest extends MatchersBase
     }
 
     @Test
-    public function enterSecondStateAddsSecondStatesSystems():Void
+    public function testenterSecondStateAddsSecondStatesSystems():Void
     {
         var state1:EngineState = new EngineState();
         var system1:RemovingSystem = new RemovingSystem();
@@ -55,7 +55,7 @@ class EngineStateMachineTest extends MatchersBase
     }
 
     @Test
-    public function enterSecondStateRemovesFirstStatesSystems():Void
+    public function testenterSecondStateRemovesFirstStatesSystems():Void
     {
         var state1:EngineState = new EngineState();
         var system1:RemovingSystem = new RemovingSystem();
@@ -73,7 +73,7 @@ class EngineStateMachineTest extends MatchersBase
     }
 
     @Test
-    public function enterSecondStateDoesNotRemoveOverlappingSystems():Void
+    public function testenterSecondStateDoesNotRemoveOverlappingSystems():Void
     {
         var state1:EngineState = new EngineState();
         var system1:RemovingSystem = new RemovingSystem();
@@ -93,7 +93,7 @@ class EngineStateMachineTest extends MatchersBase
     }
 
     @Test
-    public function enterSecondStateRemovesDifferentSystemsOfSameType():Void
+    public function testenterSecondStateRemovesDifferentSystemsOfSameType():Void
     {
         var state1:EngineState = new EngineState();
         var system1:RemovingSystem = new RemovingSystem();

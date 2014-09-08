@@ -6,24 +6,24 @@ import ash.Mocks.EmptySystem;
 import org.hamcrest.MatchersBase;
 
 
-class SystemStateTest extends MatchersBase
+class SystemStateTest extends MatchersBaseTestCase
 {
     private var state:EngineState;
 
     @Before
-    public function createState():Void
+    override public function setup():Void
     {
         state = new EngineState();
     }
 
     @After
-    public function clearState():Void
+    override public function tearDown():Void
     {
         state = null;
     }
 
     @Test
-    public function addInstanceCreatesInstanceProvider():Void
+    public function testaddInstanceCreatesInstanceProvider():Void
     {
         var component:EmptySystem = new EmptySystem();
         state.addInstance(component);
@@ -33,7 +33,7 @@ class SystemStateTest extends MatchersBase
     }
 
     @Test
-    public function addSingletonCreatesSingletonProvider():Void
+    public function testaddSingletonCreatesSingletonProvider():Void
     {
         state.addSingleton(EmptySystem);
         var provider:ISystemProvider<EmptySystem> = cast state.providers[0];
@@ -42,7 +42,7 @@ class SystemStateTest extends MatchersBase
     }
 
     @Test
-    public function addMethodCreatesMethodProvider():Void
+    public function testaddMethodCreatesMethodProvider():Void
     {
         var instance:EmptySystem = new EmptySystem();
 
@@ -58,7 +58,7 @@ class SystemStateTest extends MatchersBase
     }
 
     @Test
-    public function withPrioritySetsPriorityOnProvider():Void
+    public function testwithPrioritySetsPriorityOnProvider():Void
     {
         var priority:Int = 10;
         state.addSingleton(EmptySystem).withPriority(priority);

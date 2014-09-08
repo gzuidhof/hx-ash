@@ -4,10 +4,10 @@ import ash.core.System;
 
 import org.hamcrest.MatchersBase;
 
-class SystemInstanceProviderTest extends MatchersBase
+class SystemInstanceProviderTest extends MatchersBaseTestCase
 {
     @Test
-    public function providerReturnsTheInstance():Void
+    public function testproviderReturnsTheInstance():Void
     {
         var instance:MockSystem = new MockSystem();
         var provider:SystemInstanceProvider<MockSystem> = new SystemInstanceProvider( instance );
@@ -15,7 +15,7 @@ class SystemInstanceProviderTest extends MatchersBase
     }
 
     @Test
-    public function providersWithSameInstanceHaveSameIdentifier():Void
+    public function testprovidersWithSameInstanceHaveSameIdentifier():Void
     {
         var instance:MockSystem = new MockSystem();
         var provider1:SystemInstanceProvider<MockSystem> = new SystemInstanceProvider( instance );
@@ -24,7 +24,7 @@ class SystemInstanceProviderTest extends MatchersBase
     }
 
     @Test
-    public function providersWithDifferentInstanceHaveDifferentIdentifier():Void
+    public function testprovidersWithDifferentInstanceHaveDifferentIdentifier():Void
     {
         var provider1:SystemInstanceProvider<MockSystem> = new SystemInstanceProvider( new MockSystem() );
         var provider2:SystemInstanceProvider<MockSystem> = new SystemInstanceProvider( new MockSystem() );
