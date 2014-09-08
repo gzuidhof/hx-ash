@@ -13,7 +13,6 @@ before_script:
     - sudo apt-get update -y
     - sudo apt-get install haxe -y
     - sudo apt-get install gcc-multilib
-    - sudo apt-get install ia32-libs 
     - mkdir -p ~/.haxe/lib
     - haxelib setup ~/.haxe/lib
     - haxelib install hxcpp
