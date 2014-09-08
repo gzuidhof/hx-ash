@@ -1,0 +1,24 @@
+# For more info, see http://about.travis-ci.org/docs/user/ci-environment/
+language: node_js
+node_js: ["0.10"]
+
+os:
+  - linux
+  - osx
+ 
+# Install Haxe (and Neko) before running the test.
+# Also install required haxelibs
+before_script:
+    - sudo add-apt-repository ppa:eyecreate/haxe -y
+    - sudo apt-get update -y
+    - sudo apt-get install haxe -y
+    - mkdir -p ~/.haxe/lib
+    - haxelib setup ~/.haxe/lib
+	- haxelib install hxcpp
+	- haxelib install hamcrest
+    - cd test
+    - mkdir build
+ 
+# Run the test!
+script:
+  - haxe test.hxml
