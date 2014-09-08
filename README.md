@@ -2,7 +2,10 @@
 Ash-Haxe
 ========
 
-[![Build Status](https://travis-ci.org/Rahazan/Ash-HaXe.svg)](https://travis-ci.org/Rahazan/Ash-HaXe)
+[![Build Status](https://travis-ci.org/Rahazan/Ash-Haxe.svg)](https://travis-ci.org/Rahazan/Ash-HaXe)
+
+Fork of https://github.com/nadako/Ash-HaXe.
+----
 
 This is a HaXe port of the awesome Ash entity component framework by Richard Lord (http://www.ashframework.org/).
 It leverages HaXe's great cross-platform portability and runs on Flash, JavaScript, C++, Android, iOS and so on.
@@ -17,6 +20,7 @@ Check out original Ash website for great articles on entity frameworks and game 
  * Refine access control for private classes and fields. Original Ash used internal class/field feature of AS3, in Haxe we need to use ACL metadata.
  * Review generacted code on performance, add inlines (especially important to inline iterators)
 
+----
 **CHANGES:**
 Dead Code Elimination fix by eliasku.
 https://github.com/nadako/Ash-HaXe/pull/16
