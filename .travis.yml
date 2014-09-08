@@ -12,6 +12,7 @@ before_script:
     - sudo add-apt-repository ppa:eyecreate/haxe -y
     - sudo apt-get update -y
     - sudo apt-get install haxe -y
+    - sudo apt-get install gcc-multilib
     - mkdir -p ~/.haxe/lib
     - haxelib setup ~/.haxe/lib
     - haxelib install hxcpp
