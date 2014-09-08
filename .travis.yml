@@ -14,8 +14,8 @@ before_script:
     - sudo apt-get install haxe -y
     - mkdir -p ~/.haxe/lib
     - haxelib setup ~/.haxe/lib
-	- haxelib install hxcpp
-	- haxelib install hamcrest
+    - haxelib install hxcpp
+    - haxelib install hamcrest
     - cd test
     - mkdir build
  
