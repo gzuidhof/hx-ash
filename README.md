@@ -25,8 +25,8 @@ Check out original Ash website for great articles on entity frameworks and game 
 Dead Code Elimination fix by eliasku.
 https://github.com/nadako/Ash-HaXe/pull/16
 
-Unit tests by haxe standard unit test implementation. Allows for automated travis-ci builds.
-Note that this port required some hacks and much of it was done automatically by some scripts (minor beauty mistakes).
+Unit tests using std haxe.unit. Allows for automated travis-ci builds.
+Note that this port required some hacks and much of it was done automatically by some scripts (minor beauty flaws).
 
 
 Original Author: Dan Korostelev <nadako@gmail.com>
