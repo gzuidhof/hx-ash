@@ -2,7 +2,7 @@
 Ash-Haxe
 ========
 
-[![Build Status](https://travis-ci.org/Rahazan/Ash-Haxe.svg)](https://travis-ci.org/Rahazan/Ash-HaXe)
+[![Build Status](https://travis-ci.org/Rahazan/Ash-Haxe.svg)](https://travis-ci.org/Rahazan/Ash-Haxe)
 
 ----
 Fork of https://github.com/nadako/Ash-HaXe.
