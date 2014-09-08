@@ -38,4 +38,4 @@
 
 #-D HXCPP_M64
 -cpp build/cpp_test
--cmd (echo __ Testing C++ target. __ && ls && cd build && lis && cd cpp_test && ls && TestMain && cd .. && cd ..)
+-cmd (echo __ Testing C++ target. __ && ls && cd build && ls && cd cpp_test && ls && TestMain && cd .. && cd ..)
