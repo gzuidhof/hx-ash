@@ -22,11 +22,9 @@ Check out original Ash website for great articles on entity frameworks and game 
 
 ----
 **CHANGES:**
-Dead Code Elimination fix by eliasku.
-https://github.com/nadako/Ash-HaXe/pull/16
-
-Unit tests using std haxe.unit. Allows for automated travis-ci builds.
-Note that this port required some hacks and much of it was done automatically by some scripts (minor beauty flaws).
+ * [Dead Code Elimination fix by eliasku.](https://github.com/nadako/Ash-HaXe/pull/16)
+ * Unit tests using std haxe.unit. Allows for automated travis-ci builds. *Note that some of this port was done automatically by some scripts (minor beauty flaws in code).*
+ * Support for Java target. Useful if you want to target dalvik.
 
 
 Original Author: Dan Korostelev <nadako@gmail.com>
