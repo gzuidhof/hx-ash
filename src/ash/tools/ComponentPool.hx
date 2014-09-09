@@ -53,7 +53,7 @@ class ComponentPool
         if (pool.length > 0)
             return pool.pop();
         else
-            return Type.createInstance(componentClass, []);
+            return Type.createEmptyInstance(componentClass);
     }
 
     /**
