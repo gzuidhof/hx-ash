@@ -16,7 +16,7 @@ before_script:
     - mkdir -p ~/.haxe/lib
     - haxelib setup ~/.haxe/lib
     - haxelib install hxcpp
-	- haxelib install hxjava
+    - haxelib install hxjava
     - haxelib install hamcrest
     - cd test
     - mkdir build
