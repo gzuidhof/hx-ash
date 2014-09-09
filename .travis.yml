@@ -7,7 +7,7 @@ os:
   - osx
  
 # Install Haxe (and Neko) before running the test.
-# Also install required haxelibs
+# Also install required haxelibs (hxcpp hxjava and hamcrest)
 before_script:
     - sudo add-apt-repository ppa:eyecreate/haxe -y
     - sudo apt-get update -y
