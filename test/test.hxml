@@ -40,6 +40,8 @@
 -cpp build/cpp_test
 -cmd (echo __ Testing C++ target. __ && cd build && cd cpp_test && ./TestMain && cd .. && cd ..)
 
+--next
+
 ## Java
 -main TestMain
 -lib hamcrest
