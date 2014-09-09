@@ -42,7 +42,7 @@ class SystemSingletonProvider<T:System> implements ISystemProvider<T>
     public function getSystem():T
     {
         if (instance == null)
-            instance = Type.createInstance(componentType, []);
+            instance = Type.createEmptyInstance(componentType);
         return instance;
     }
 

@@ -30,7 +30,7 @@ class ComponentSingletonProvider<T> implements IComponentProvider<T>
     {
         if (instance == null)
         {
-            instance = Type.createInstance(componentType, []);
+            instance = Type.createEmptyInstance(componentType);
         }
         return instance;
     }
