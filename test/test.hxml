@@ -39,3 +39,13 @@
 #-D HXCPP_M64
 -cpp build/cpp_test
 -cmd (echo __ Testing C++ target. __ && cd build && cd cpp_test && ./TestMain && cd .. && cd ..)
+
+## Java
+-main TestMain
+-lib hamcrest
+-cp ../src
+-cp ../test
+
+#-D HXCPP_M64
+-java build/java
+-cmd (echo __ Testing Java target. __ && java -jar build/java/TestMain.jar)

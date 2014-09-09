@@ -10,6 +10,7 @@ class TestMain
 	public function new()
 	{
 		var runner = new TestRunner();
+		
 		runner.add(new ash.core.AshAndFamilyIntegrationTest());
 		runner.add(new ash.core.ComponentMatchingFamilyTest());
 		runner.add(new ash.core.EngineTest());
@@ -30,7 +31,6 @@ class TestMain
 		runner.add(new ash.signals.SignalTest());
 		runner.add(new ash.tools.ComponentPoolTest());
 		runner.add(new ash.tools.ListIteratingSystemTest());
-		
 		runner.run();
 		
 		#if js

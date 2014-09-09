@@ -28,7 +28,7 @@ class ShouldCallHelper<T>
     {
 		if (!called)
 		{
-			throw "Awrf! ShouldCallHelper assert failed ";
+			throw "Awrf! ShouldCallHelper assert failed";
 		}
 		return called;
     }
