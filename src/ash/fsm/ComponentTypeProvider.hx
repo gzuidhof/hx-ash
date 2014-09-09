@@ -27,7 +27,7 @@ class ComponentTypeProvider<T> implements IComponentProvider<T>
 
     public function getComponent():T
     {
-        return Type.createInstance(componentType, []);
+		return Type.createEmptyInstance(componentType);
     }
 
     /**
