@@ -26,6 +26,9 @@ Check out original Ash website for great articles on entity frameworks and game 
  * Unit tests using std haxe.unit. Allows for automated travis-ci builds. *Note that some of this port was done automatically by some scripts (minor beauty flaws in code).*
  * Support for Java target. Useful if you want to target dalvik.
 
+**TODO**
+ * Make the switch to MSignal.
+
 
 Original Author: Dan Korostelev <nadako@gmail.com>
 
