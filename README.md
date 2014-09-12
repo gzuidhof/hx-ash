@@ -5,7 +5,7 @@ hx-ash
 [![Build Status](https://travis-ci.org/Rahazan/hx-ash.svg)](https://travis-ci.org/Rahazan/hx-ash)
 
 ----
-Fork/coninuation of https://github.com/nadako/Ash-HaXe.
+Fork/continuation of https://github.com/nadako/Ash-HaXe.
 
 This is a HaXe port of the awesome Ash entity component framework by Richard Lord (http://www.ashframework.org/).
 It leverages HaXe's great cross-platform portability and runs on Flash, JavaScript, C++, Android, iOS and so on.
