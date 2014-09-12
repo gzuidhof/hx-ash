@@ -4,6 +4,5 @@
 -cp ../src
 -cp ../test
 
-#-D HXCPP_M64
 -java build/java
 -cmd (echo __ Testing Java target. __ && java -jar build/java/TestMain.jar)
