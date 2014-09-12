@@ -21,13 +21,19 @@ Check out original Ash website for great articles on entity frameworks and game 
  * Review generacted code on performance, add inlines (especially important to inline iterators)
 
 ----
-**CHANGES:**
+**Install**
+
+    haxelib install hx-ash
+
+----
+**CHANGES from original port:**
  * [Dead Code Elimination fix by eliasku.](https://github.com/nadako/Ash-HaXe/pull/16)
  * Unit tests using std haxe.unit. Allows for automated travis-ci builds. *Note that some of this port was done automatically by some scripts (minor beauty flaws in code).*
  * Support for Java target. Useful if you want to target dalvik.
 
 **TODO**
  * Make the switch to MSignal.
+ * Check whether example is still functional
 
 
 Original Author: Dan Korostelev <nadako@gmail.com>
