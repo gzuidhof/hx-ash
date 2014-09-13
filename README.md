@@ -12,7 +12,7 @@ It leverages HaXe's great cross-platform portability and runs on Flash, JavaScri
 Also it uses much static typing features of HaXe, allowing more mistakes to be detected at compile time instead
 of runtime than in original ActionScript 3 version.
 
-Check out original Ash website for great articles on entity frameworks and game development.
+Check out original [Ash website](http://www.ashframework.org/) for great articles on entity frameworks and game development.
 
 **TODO:**
 
@@ -28,13 +28,16 @@ Check out original Ash website for great articles on entity frameworks and game 
 ----
 **CHANGES from original port:**
  * [Dead Code Elimination fix by eliasku.](https://github.com/nadako/Ash-HaXe/pull/16)
- * Unit tests using std haxe.unit. Allows for automated travis-ci builds. *Note that some of this port was done automatically by some scripts (minor beauty flaws in code).*
+ * Unit tests using std haxe.unit. Allows for automated travis-ci builds. *Note that some of this port was done automatically by some scripts (some beauty flaws in code).*
  * Support for Java target. Useful if you want to target dalvik.
 
 **TODO**
  * Make the switch to MSignal.
  * Check whether example is still functional
 
+----
+**Contributors**
 
-Original Author: Dan Korostelev <nadako@gmail.com>
+Dan Korstelev, Elias Ku, Guido Zuidhof
+
 
