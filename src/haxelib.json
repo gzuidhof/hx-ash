@@ -6,6 +6,6 @@
     "description": "Continuation/fork of port by nadako. Entity component framework originally written in ActionScript 3, see http://www.ashframework.org/",
     "version": "0.1.0",
     "releasenote": "Initial release",
-    "contributors": ["Guido", "nadako"],
+    "contributors": ["Guido", "nadako", "Rahazan", "theor"],
     "dependencies": {}
 }
