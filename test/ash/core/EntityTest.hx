@@ -27,6 +27,14 @@ class EntityTest extends MatchersBaseTestCase
     }
 
     @Test
+    public function testEntityIdsAreSequential():Void
+    {
+        var id = entity.id;
+        var entity2 = new Entity();
+        assertThat(entity2.id, equalTo(id + 1));
+    }
+
+    @Test
     public function testAddReturnsReferenceToEntity():Void
     {
         var component:MockComponent = new MockComponent();

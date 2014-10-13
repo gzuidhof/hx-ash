@@ -37,6 +37,26 @@ class EngineTest extends MatchersBaseTestCase
     }
 
     @Test
+    public function testGetEntityByIdReturnsCorrectEntity():Void
+    {
+        var entity1:Entity = new Entity();
+        engine.addEntity(entity1);
+        var entity2:Entity = new Entity();
+        engine.addEntity(entity2);
+        assertThat(engine.getEntityById(entity2.id), sameInstance(entity2));
+    }
+
+    @Test
+    public function testGetEntityByIdReturnsNullIfNoEntity():Void
+    {
+        var entity1:Entity = new Entity();
+        engine.addEntity(entity1);
+        var entity2:Entity = new Entity();
+        engine.addEntity(entity2);
+        assertThat(engine.getEntityById(-1), is(null));
+    }
+
+    @Test
     public function testGetEntityByNameReturnsCorrectEntity():Void
     {
         var entity1:Entity = new Entity();
