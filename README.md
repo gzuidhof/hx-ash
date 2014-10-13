@@ -29,15 +29,16 @@ Check out original [Ash website](http://www.ashframework.org/) for great article
 **CHANGES from original port:**
  * [Dead Code Elimination fix by eliasku.](https://github.com/nadako/Ash-HaXe/pull/16)
  * Unit tests using std haxe.unit. Allows for automated travis-ci builds. *Note that some of this port was done automatically by some scripts (some beauty flaws in code).*
+ * [Entity unique IDs that can be used to retrieve them](https://github.com/Rahazan/hx-ash/pull/1), contributed by theor.
  * Support for Java target. Useful if you want to target dalvik.
 
 **TODO**
- * Make the switch to MSignal.
+ * Maybe make the switch to MSignal.
  * Check whether example is still functional
 
 ----
 **Contributors**
 
-Dan Korstelev, Elias Ku, Guido Zuidhof
+Dan Korstelev, Elias Ku, Guido Zuidhof, theor
 
 
