@@ -32,7 +32,7 @@ class Entity
     /**
      * Automatic unique entity id
      */
-    public var id(default, never):Int;
+    public var id(default, null):Int;
     /**
      * This signal is dispatched when a component is added to the entity.
      */
