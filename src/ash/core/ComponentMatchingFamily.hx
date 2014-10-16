@@ -131,7 +131,6 @@ class ComponentMatchingFamily<TNode:Node<TNode>> implements IFamily<TNode>
             }
             for (componentClass in optionalComponents.keys())
             {
-                // trace('  opt: $componentClass');
                 Reflect.setField(node, optionalComponents.get(componentClass), entity.get(componentClass));
             }
             entities.set(entity, node);
