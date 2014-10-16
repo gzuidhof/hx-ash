@@ -8,6 +8,8 @@ import haxe.macro.Expr;
  * This macro iterates over fields declared in Node subclasses and creates
  * a static function that returns a mapping from component classes to property names
  * for use in ComponentMatchingFamily class.
+ * It creates a second mapping for optional components, marked with the @optional
+ * attribute.
  **/
 class NodeMacro
 {

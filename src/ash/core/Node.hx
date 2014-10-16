@@ -8,6 +8,10 @@ package ash.core;
  * a node for every entity that has all of the components in the node class and adds these nodes
  * to the list obtained by the system. The engine keeps the list up to date as entities are added
  * to and removed from the engine and as the components on entities change.</p>
+ *
+ * <p>Nodes can be marked with the @optional attribute. In this case, they will be available in
+ * the node if they are present in the entity, but are not required to be there. Those components
+ * will default to null in the node.</p>
  */
 @:autoBuild(ash.core.NodeMacro.build())
 class Node<TNode>
