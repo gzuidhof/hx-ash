@@ -30,6 +30,7 @@ Check out original [Ash website](http://www.ashframework.org/) for great article
  * [Dead Code Elimination fix by eliasku.](https://github.com/nadako/Ash-HaXe/pull/16)
  * Unit tests using std haxe.unit. Allows for automated travis-ci builds. *Note that some of this port was done automatically by some scripts (some beauty flaws in code).*
  * [Entity unique IDs that can be used to retrieve them](https://github.com/Rahazan/hx-ash/pull/1), contributed by theor.
+ * Optional components in nodes using @optional attribute - null if not present in the entity, does not affect the entity matching by a system
  * Support for Java target. Useful if you want to target dalvik.
 
 **TODO**

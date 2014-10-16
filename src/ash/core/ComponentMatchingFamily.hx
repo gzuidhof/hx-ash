@@ -22,6 +22,7 @@ class ComponentMatchingFamily<TNode:Node<TNode>> implements IFamily<TNode>
     private var entities:Map<Entity, TNode>;
     private var nodeClass:Class<TNode>;
     private var components:ClassMap<Class<Dynamic>, String>;
+    private var optionalComponents:ClassMap<Class<Dynamic>, String>;
     private var nodePool:NodePool<TNode>;
     private var engine:Engine;
 
@@ -50,11 +51,13 @@ class ComponentMatchingFamily<TNode:Node<TNode>> implements IFamily<TNode>
 
         #if cpp
         components = Reflect.field(nodeClass, "_getComponents")();
+        optionalComponents = Reflect.field(nodeClass, "_getOptionalComponents")();
         #else
         components = untyped nodeClass._getComponents();
+        optionalComponents = untyped nodeClass._getOptionalComponents();
         #end
 
-        nodePool = new NodePool<TNode>( nodeClass, components );
+        nodePool = new NodePool<TNode>( nodeClass, components, optionalComponents );
     }
 
     /**
@@ -85,6 +88,14 @@ class ComponentMatchingFamily<TNode:Node<TNode>> implements IFamily<TNode>
         if (components.exists(componentClass))
         {
             removeIfMatch(entity);
+        }
+        else if (optionalComponents.exists(componentClass))
+        {
+            if (entities.exists(entity))
+            {
+                var node:TNode = entities.get(entity);
+                Reflect.setField(node, optionalComponents.get(componentClass), null);
+            }
         }
     }
 
@@ -117,6 +128,10 @@ class ComponentMatchingFamily<TNode:Node<TNode>> implements IFamily<TNode>
             for (componentClass in components.keys())
             {
                 Reflect.setField(node, components.get(componentClass), entity.get(componentClass));
+            }
+            for (componentClass in optionalComponents.keys())
+            {
+                Reflect.setField(node, optionalComponents.get(componentClass), entity.get(componentClass));
             }
             entities.set(entity, node);
             nodeList.add(node);
