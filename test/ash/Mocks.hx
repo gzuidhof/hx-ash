@@ -45,6 +45,13 @@ class MockNode4 extends Node<MockNode4>
     }
 }
 
+class MockNodeOpt extends Node<MockNodeOpt>
+{
+    public var point:Point;
+    @optional
+    public var optMatrix:Matrix;
+}
+
 class MockComponent
 {
     public var value:Int;
