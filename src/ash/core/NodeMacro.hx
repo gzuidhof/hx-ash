@@ -19,8 +19,11 @@ class NodeMacro
         Context.getLocalClass().get().meta.add(":keep", [], pos);
 
         var populateExprs = [];
+        var populateOptionalExprs = [];
         for (field in fields)
         {
+            var isOptional = Lambda.exists(field.meta, function(m){ return m.name == "optional"; });
+			
             switch (field.kind)
             {
                 case FVar(type, _):
@@ -30,7 +33,10 @@ class NodeMacro
                             // TODO: add support for type parameters
                             if (path.params.length > 0)
                                 throw new Error("Type parameters for node field types are not yet supported yet", field.pos);
-                            populateExprs.push(macro _components.set($i{path.name}, $v{field.name}));
+                            if(isOptional)
+                                populateOptionalExprs.push(macro _optionalComponents.set($i{path.name}, $v{field.name}));
+                            else
+                                populateExprs.push(macro _components.set($i{path.name}, $v{field.name}));
                         default:
                             throw new Error("Invalid node class with field type other than class: " + field.name, field.pos);
                     }
@@ -72,6 +78,34 @@ class NodeMacro
             access: [APublic, AStatic],
             pos: pos
         });
+
+
+         fields.push({
+            name: "_optionalComponents",
+            kind: FVar(componentsType),
+            access: [APrivate, AStatic],
+            pos: pos
+        });  
+
+        fields.push({
+            name: "_getOptionalComponents",
+            kind: FFun({
+                args: [],
+                params: [],
+                ret: componentsType,
+                expr: macro
+                {
+                    if (_optionalComponents == null)
+                    {
+                        _optionalComponents = new ash.ClassMap<Class<Dynamic>, String>();
+                        $b{populateOptionalExprs};
+                    }
+                    return _optionalComponents;
+                }
+            }),
+            access: [APublic, AStatic],
+            pos: pos
+        });     
 
         return fields;
     }

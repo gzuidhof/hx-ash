@@ -14,14 +14,16 @@ class NodePool<TNode:Node<TNode>>
     private var nodeClass:Class<TNode>;
     private var cacheTail:TNode;
     private var components:ClassMap<Class<Dynamic>, String>;
+    private var optionalComponents:ClassMap<Class<Dynamic>, String>;
 
     /**
      * Creates a pool for the given node class.
      */
-    public function new(nodeClass:Class<TNode>, components:ClassMap<Class<Dynamic>, String>)
+    public function new(nodeClass:Class<TNode>, components:ClassMap<Class<Dynamic>, String>, optionalComponents:ClassMap<Class<Dynamic>, String>)
     {
         this.nodeClass = nodeClass;
         this.components = components;
+        this.optionalComponents = optionalComponents;
     }
 
     /**
@@ -48,6 +50,8 @@ class NodePool<TNode:Node<TNode>>
     public function dispose(node:TNode):Void
     {
         for (componentName in components)
+            Reflect.setField(node, componentName, null);
+        for (componentName in optionalComponents)
             Reflect.setField(node, componentName, null);
         node.entity = null;
         node.next = null;
