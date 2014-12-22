@@ -217,6 +217,7 @@ class MockFamily<T:Node<T>> implements IFamily<T>
     public var componentRemovedCalls:Int = 0;
     public var cleanUpCalls:Int = 0;
 
+	@:keep
     public function new(nodeClass:Class<T>, engine:Engine)
     {
         instances.push(this);

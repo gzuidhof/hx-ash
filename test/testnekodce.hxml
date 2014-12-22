@@ -1,0 +1,9 @@
+## Neko
+-main TestMain
+-lib hamcrest
+-cp ../src
+-cp ../test
+-dce full
+
+-neko build/testdce.n
+-cmd (echo __ Testing neko target with full DCE. __ && neko build/testdce.n)

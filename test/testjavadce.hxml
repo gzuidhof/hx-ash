@@ -1,0 +1,9 @@
+## Java
+-main TestMain
+-lib hamcrest
+-cp ../src
+-cp ../test
+-dce full
+
+-java build/javadce
+-cmd (echo __ Testing Java target with full DCE. __ && java -jar build/javadce/TestMain.jar)

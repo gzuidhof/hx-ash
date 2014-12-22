@@ -24,3 +24,6 @@ before_script:
 # Run the test!
 script:
   - haxe test.hxml
+  - haxe testjavadce.hxml
+  - haxe testjsdce.hxml
+  - haxe testnekodce.hxml

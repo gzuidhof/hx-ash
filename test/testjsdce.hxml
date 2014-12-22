@@ -1,0 +1,7 @@
+-main TestMain
+-lib hamcrest
+-cp ../src
+-cp ../test
+
+-js build/testdce.js
+-cmd (echo __ Testing html5 target with full DCE. __ && phantomjs build/testdce.js)
