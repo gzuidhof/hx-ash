@@ -187,7 +187,7 @@ class AshAndFamilyIntegrationTest extends MatchersBaseTestCase
             var index:Int = Lambda.indexOf(entities, node.entity);
             entities.splice(index, 1);
         }
-        assertThat(entities, emptyArray());
+		assertTrue(entities.length == 0);
     }
 
     @Test

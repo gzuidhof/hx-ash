@@ -17,13 +17,13 @@ before_script:
     - haxelib setup ~/.haxe/lib
     - haxelib install hxcpp
     - haxelib install hxjava
-    - haxelib install hamcrest 1.2.1
+    - haxelib git hamcrest https://github.com/alebianco/hamcrest-haxe.git 3e5f663f7d src
     - cd test
     - mkdir build
  
 # Run the test!
 script:
-  - haxe test.hxml
-  - haxe testjavadce.hxml
+#  - haxe test.hxml
+#  - haxe testjavadce.hxml
   - haxe testjsdce.hxml
   - haxe testnekodce.hxml

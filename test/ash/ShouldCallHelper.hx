@@ -35,8 +35,9 @@ class ShouldCallHelper<Function>
 
     private function _func(args:Array<Dynamic>):Dynamic
     {
-        var result = Reflect.callMethod(context, callback, args);
+        //var result = Reflect.callMethod(context, callback, args);
         called = true;
+		var result = null;
         return result;
     }
 }

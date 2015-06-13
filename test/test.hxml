@@ -36,7 +36,7 @@
 -cp ../src
 -cp ../test
 
-#-D HXCPP_M64
+-D HXCPP_M64
 -cpp build/cpp_test
 -cmd (echo __ Testing C++ target. __ && cd build && cd cpp_test && ./TestMain && cd .. && cd ..)
 

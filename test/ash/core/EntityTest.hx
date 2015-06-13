@@ -207,7 +207,7 @@ class EntityTest extends MatchersBaseTestCase
         entity = new Entity( "anything" );
         entity.nameChanged.add(h.func);
         entity.name = "otherThing";
-        h.assertIsCalled();
+        assertTrue(h.assertIsCalled());
     }
 
     private function atestNameChangedSignal(signalEntity:Entity, oldName:String):Void

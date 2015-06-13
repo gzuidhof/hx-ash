@@ -65,7 +65,8 @@ class NodeListTest extends MatchersBaseTestCase
             var index:Int = Lambda.indexOf(nodeArray, node);
             nodeArray.splice(index, 1);
         }
-        assertThat(nodeArray, emptyArray());
+		assertTrue(nodeArray.length == 0);
+        //assertThat(nodeArray, emptyArray());
     }
 
     @Test
@@ -89,7 +90,7 @@ class NodeListTest extends MatchersBaseTestCase
                 nodes.remove(node);
             }
         }
-        assertThat(nodeArray, emptyArray());
+		assertTrue(nodeArray.length == 0);
     }
 
     @Test
