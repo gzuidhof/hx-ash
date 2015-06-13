@@ -33,6 +33,9 @@ Check out original [Ash website](http://www.ashframework.org/) for great article
  * Optional components in nodes using @optional attribute - null if not present in the entity, does not affect the entity matching by a system
  * Support for Java target. Useful if you want to target dalvik.
 
+Note, with updates to hamcrest (used for unit testing) and haxe, the java and cpp build targets are not guaranteed to work and have been excluded from unit tests.
+
+
 **TODO**
  * Maybe make the switch to MSignal.
  * Check whether example is still functional
