@@ -3,15 +3,15 @@ package ash;
 import haxe.PosInfos;
 
 
-class ShouldCallHelper<T>
+class ShouldCallHelper<haxe.Function>
 {
     private var called:Bool;
-    private var callback:T;
+    private var callback:haxe.Function;
     private var context:Dynamic;
 
-    public var func(default, null):T;
+    public var func(default, null):haxe.Function;
 
-    public function new(callback:T, context:Dynamic = null)
+    public function new(callback:haxe.Function, context:Dynamic = null)
     {
         this.callback = callback;
         this.context = context;
