@@ -6,6 +6,8 @@ hx-ash
 
 ----
 Fork/continuation of https://github.com/nadako/Ash-HaXe.
+----
+#The [original repository](https://github.com/nadako/Ash-HaXe) has continued development again, rendering this continuation obsolete.
 
 This is a HaXe port of the awesome Ash entity component framework by Richard Lord (http://www.ashframework.org/).
 It leverages HaXe's great cross-platform portability and runs on Flash, JavaScript, C++, Android, iOS and so on.
